@@ -8,14 +8,25 @@ cur = db.cursor()
 # Items Bought: Order number, date and price connect to primary keys in the Items and
 # Customer tables
 
-cur.execute('''CREATE TABLE IF NOT EXISTS Customer ( id integer PRIMARY KEY, firstname
-varchar(255), lastname varchar(255))''')
-cur.execute('''CREATE TABLE IF NOT EXISTS Item ( id integer PRIMARY KEY, title
-varchar(255), price decimal )''')
-cur.execute('''CREATE TABLE IF NOT EXISTS BoughtItem ( ordernumber integer PRIMARY KEY,
-customerid integer, itemid integer, price decimal, CONSTRAINT customerid FOREIGN KEY
-(customerid) REFERENCES Customer(id), CONSTRAINT itemid FOREIGN KEY (itemid) REFERENCES
-Item(id) )''')
+cur.execute('''CREATE TABLE IF NOT EXISTS Customer ( 
+                id integer PRIMARY KEY,
+                firstname varchar(255), 
+                lastname varchar(255))''')
+
+cur.execute('''CREATE TABLE IF NOT EXISTS Item ( 
+                id integer PRIMARY KEY, 
+                title varchar(255), 
+                price decimal )''')
+
+cur.execute('''CREATE TABLE IF NOT EXISTS BoughtItem ( 
+                ordernumber integer PRIMARY KEY,
+                customerid integer,
+                itemid integer,
+                price decimal,
+                CONSTRAINT customerid
+                    FOREIGN KEY (customerid) REFERENCES Customer(id), 
+                CONSTRAINT itemid 
+                    FOREIGN KEY (itemid) REFERENCES Item(id) )''')
 
 cur.execute('''INSERT INTO Customer(firstname, lastname)
                VALUES ('Bob', 'Adams'),
